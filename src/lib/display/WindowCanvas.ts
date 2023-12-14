@@ -13,6 +13,10 @@ export class WindowCanvas {
 		return this.context;
 	}
 
+	isRunning() {
+		return this.newWindow !== null;
+	}
+
 	closed() {
 		this.newWindow = null;
 		this.context = null;

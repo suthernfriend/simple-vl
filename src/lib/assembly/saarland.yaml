@@ -1,0 +1,139 @@
+event: "4. Ordentlichen Landesparteitag von Volt Deutschland Landesverband Saarland"
+start: "2023-12-03T10:00:00.000Z"
+location: "Robinsondorf Neunkirchen, Tannenschlag 1, 66539 Neunkirchen-Furpach"
+motions:
+  S-1:
+    title: "Paritätische Versammlungsleitung"
+    link: https://drive.google.com/file/d/1DGKIpypMUBVhGMa1EP8o9n2vrJ3yXs4S/view
+    presenter: "Erik Hoffmann"
+  W-1:
+    title: "“Europastadt Saarbrücken” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1Wk1qi78jNicyNXKF2eveygD7vcFe5-KI/view
+    presenter: "Lennart Grabe"
+  W-2:
+    title: "“Frühkindliche Bildung” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1x9KWRgBTsAsI0c76p0WVbpydXezp5_EN/view
+    presenter: "Tina Ferlisi"
+  W-3:
+    title: "“Schule” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/199C09jveREs8BWm7YrGpF4wZLNE9Pcq7/view
+    presenter: "Lennart Grabe"
+  W-4:
+    title: "“Chancengleichheit” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1KNYgc0SUqW-W-BDACxVrtCrWmqweUnJr/view
+    presenter: "Lennart Grabe"
+  W-5:
+    title: "“Eltern unterstützen” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1q2vKK9AWXZCB1tUpicpJzzm5g8vrldO1/view
+    presenter: "Lennart Grabe"
+  W-6:
+    title: "“Freizeit” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1eEdChTWLv8WpF_RIt1J31q8KKuo0epZp/view
+    presenter: "Lennart Grabe"
+  W-7:
+    title: "“Sicherheit von Frauen*” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1XS3YrkVQDXWtlMPHB0b48dHKsigBZwrE/view
+    presenter: "Denise Rieth"
+  W-8:
+    title: "“Berufliche Bildung” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1UCISW2urrseTuT4EYu8ex04HUIhGWIea/view
+    presenter: "Lennart Grabe"
+  W-9:
+    title: "“Vielfältige Gesellschaft” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1JNFxEtzKau6EBjivMytbUYdtmQknaHqh/view
+    presenter: "Lennart Grabe"
+  W-10:
+    title: "“Direkte Demokratie” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1CXBbnL1ItdH_yE40qyUS1c9QUbb_BWXT/view
+    presenter: "Erik Hoffmann"
+  W-11:
+    title: "“Kein Raum für Diskriminierung” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1xuk1gjlfj-HYwy_7h9FYdF9Z7Dm0J1wp/view
+    presenter: "Lennart Grabe"
+  W-12:
+    title: "“Innovationsstandort Saarbrücken” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1N2a9Gg8UBbSbzdK6Q4RQogF8eSk_P28W/view
+    presenter: "Lennart Grabe"
+  W-13:
+    title: "“Wohnen” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1mMCFQXqZ8PeY2d-C1Vz6fV3jhuYW9wzf/view
+    presenter: "Erik Hoffmann"
+  W-14:
+    title: "“Grüne Stadt für glückliche Menschen” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1tJC3GSSPWvdfGSPwVlW190TeSRDnO85m/view
+    presenter: "Lennart Grabe"
+  W-15:
+    title: "“Mobilität” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1NG-HAw6CuAMIWlUZt1QSkXkU4c1sOGH6/view
+    presenter: "Nico Werth"
+  W-16:
+    title: "“Ehrenamt” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/1m0mhKahRpdVcCrfOg5Nz1QqRUjERn8pR/view
+    presenter: "Lennart Grabe"
+  W-17:
+    title: "“Kulturförderung” - Inhalt für das Kommunalwahlprogramm"
+    link: https://drive.google.com/file/d/17ikBs4Gi0G8GaNpmlGx_HwGE2kwfwFy3/view
+    presenter: "Lennart Grabe"
+agenda:
+  - type: "opening"
+    digit: "1"
+    title: "Eröffnung des Parteitages"
+  - type: "chairperson-election"
+    digit: "2"
+    title: "Wahl der Versammlungsleitung"
+  - type: "counting-commission-election"
+    digit: "3"
+    title: "Wahl der Zählkommission"
+  - type: "agenda-approval"
+    digit: "4"
+    title: "Genehmigung der Tagesordnung"
+  - type: "motion-order"
+    digit: "5"
+    title: "Beschluss der Antragsreihenfolge"
+  - type: "amendments"
+    digit: "6"
+    title: "Anträge zur Änderung der Satzung"
+    motions: []
+  - type: "amendments"
+    digit: "7"
+    title: "Anträge zur Änderung der Geschäftsordnung"
+    motions:
+      - S-1
+  - type: "amendments"
+    digit: "8"
+    title: "Anträge zur Änderung der Wahlordnung"
+    motions: []
+  - type: "amendments"
+    digit: "9"
+    title: "Beschluss des Haushaltsplans für das Jahr 2024"
+    motions: []
+  - type: "amendments"
+    digit: "10"
+    title: "Beschluss des Wahlprogramms zur Kommunalwahl 2024"
+    motions:
+      - W-1
+      - W-2
+      - W-3
+      - W-4
+      - W-5
+      - W-6
+      - W-7
+      - W-8
+      - W-9
+      - W-10
+      - W-11
+      - W-12
+      - W-13
+      - W-14
+      - W-15
+      - W-16
+      - W-17
+  - type: "election"
+    digit: "11"
+    title: "Nachwahl des Schiedsgerichts"
+    system:
+      - norm: "§ 10 Schiedsgerichtsordnung"
+    candidates: []
+  - type: "closing"
+    digit: "12"
+    title: "Schluss des Landesparteitages"
