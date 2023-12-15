@@ -43,3 +43,58 @@ agendaTypes:
     rundown:
       - title: "Aufruf des Tagesordnungpunkts"
         slide: "top"
+      - title: "Offene Abstimmung"
+        text: "Wahl der Zählkommission mit einfacher Mehrheit"
+        example: "Ich schlage vor als Zählkommission: {countingCommission}"
+
+  agenda-approval:
+    rundown:
+      - title: "Aufruf des Tagesordnungpunkts"
+        slide: "top"
+      - title: "Vorstellung"
+        text: "Die (geänderte) Tagesordnung wird auf einer Folie vorgestellt"
+        slide: "agenda"
+      - title: "Änderungsanträge zur Tagesordnung"
+        text: "Hier könnten Änderungsanträge zur Tagesordnung gestellt werden"
+      - title: "Offene Abstimmung"
+        text: "Über die Tagesordnung muss mit einfacher Mehrheit Beschluss gefasst werden."
+        example: "Stimmt ihr der (geänderten) Tagesordnung, wie vorgestellt zu?"
+
+  motion-order:
+    rundown:
+      - title: "Aufruf des Tagesordnungpunkts"
+        text: "Kurz erklären, dass wir über die Antragsreihenfolge abstimmen müssen"
+        slide: "top"
+      - title: "Vorstellung"
+        text: "Die Antragsreihenfolge wird auf einer Folie vorgestellt"
+        slide: "motion-order"
+      - title: "Offene Abstimmung"
+        text: "Über die Antragsreihenfolge muss mit einfacher Mehrheit Beschluss gefasst werden."
+        example: "Stimmt ihr der Antragsreihenfolge, wie vorgestellt zu?"
+
+  amendments:
+    rundown:
+      - title: "Aufruf des Tagesordnungpunkts"
+        slide: "top"
+      - foreachMotion:
+        - title: "Vorstellung"
+          text: "Vorstellung des Antrags durch den Antragssteller (oder die als Vortragenden bestimmte Person)"
+        - title: "Externen Link öffnen"
+          operation: "loadMotionLink"
+        - title: "Debatte"
+          text: "In einer Debatte wird der Antrag debattiert, dazu können Teilnehmer Redebeiträge einbringen. Auf Redebeiträge können Zwischenfragen an den jeweiligen Redner gestellt werden."
+        - title: "Vorstellung Änderungsanträge"
+          text: "Die Vorstellung der Änderungsanträge folgt."
+        - foreachAmemdment:
+          - title: "Externen Link öffnen"
+            operation: "loadMotionLink"
+          - title: "Debatte"
+            text: "In einer Debatte wird der Änderungsantrag debattiert, dazu können Teilnehmer Redebeiträge einbringen. Auf Redebeiträge können Zwischenfragen an den jeweiligen Redner gestellt werden."
+          - title: "Offene Abstimmung"
+            text: "In einer offenen Abstimmung wird über den Änderungsantrag abgestimmt. Hierbei wird zuerst nach Zustimmung und dann nach Gegenstimmen, sowie nach Enthaltungen gefragt."
+            example: "Wer stimmt für den Änderungsantrag {amendmentDigit} zum Antrag {motionDigit}? Wer stimmt dagegen? Wer enthält sich der Stimme?"
+        - title: "Debatte"
+          text: "In einer zweiten Debatte über den Hauptantrag können erneut Redebeiträge über den Antrag mitsamt aller Änderungsanträge eingebracht werden."
+        - title: "Offene Abstimmung"
+          text: "In einer offenen Abstimmung wird über den Hauptantrag mitsamt aller abgestimmten Änderungsanträge abgestimmt. Hierbei wird zuerst nach Zustimmung und dann nach Gegenstimmen, sowie nach Enthaltungen gefragt."
+          example: "Wer stimmt für den Antrag {motionDigit}? Wer stimmt dagegen? Wer enthält sich der Stimme?"
