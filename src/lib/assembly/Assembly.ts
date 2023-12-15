@@ -56,6 +56,7 @@ export type AgendaItem = AgendaItemOpening
 
 export interface Assembly {
     event: string;
+    association: string;
     start: string;
     location: string;
     motions: { [name: string]: Motion };

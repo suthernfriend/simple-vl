@@ -4,6 +4,7 @@ import {
 import type {
 	GenericVoltBackgroundAwareRenderableOptions
 } from "@/lib/display/templates/GenericVoltBackgroundAwareRenderable";
+import { Vector2D } from "@/lib/display/templates/Vector2D";
 
 
 export interface AgendaItemTitleOptions extends GenericVoltBackgroundAwareRenderableOptions {
@@ -27,7 +28,7 @@ export class AgendaItemTitle extends GenericVoltBackgroundAwareRenderable {
 		const x = padding;
 		const maxWidth = this.width() - padding * 2;
 
-		y += this.fillTextV(x, y, maxWidth, "bold 36px Ubuntu", "#ffffff", "left", digitText);
-		y += this.fillTextV(x, y, maxWidth, "bold 96px Ubuntu", "#ffffff", "left", this.soptions.title);
+		y += this.fillTextV(new Vector2D(x, y), maxWidth, "bold 36px Ubuntu", "#ffffff", "left", true, digitText);
+		y += this.fillTextV(new Vector2D(x, y), maxWidth, "bold 96px Ubuntu", "#ffffff", "left", true, this.soptions.title);
 	}
 }
