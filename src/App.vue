@@ -2,26 +2,23 @@
 
 import { WindowCanvas } from "@/lib/display/WindowCanvas";
 import type { Renderable } from "@/lib/display/Renderable";
-import { Splashscreen } from "@/lib/display/templates/Splashscreen";
 import { computed, reactive, ref } from "vue";
 
-import assemblyImport from "@/lib/assembly/saarland.yaml";
+import assemblyImport from "@/lib/assembly/rlp.yaml";
 import type { AgendaItem, Assembly } from "@/lib/assembly/Assembly";
-import { AgendaItemTitle } from "@/lib/display/templates/AgendaItemTitle";
-import { TextContentSlide } from "@/lib/display/templates/TextContentSlide";
 import Clock from "@/components/Clock.vue";
 import Stopwatch from "@/components/Stopwatch.vue";
-import type { ProceduresFileSchemaRundownStep, ProceduresParameters } from "@/lib/assembly/Procedures";
+import type { LinearRundownItem, ProceduresParameters } from "@/lib/assembly/Procedures";
 import { Procedures } from "@/lib/assembly/Procedures";
 import { getRandomColor } from "@/lib/display/templates/GenericVoltBackgroundAwareRenderable";
 import AssemblyState from "@/components/AssemblyState.vue";
+import type { SpecialOperation } from "@/lib/display/SpecialOperation";
 
 const assembly = assemblyImport as Assembly;
 
 const screen = ref<"settings" | "agenda">("settings");
 const agendaItem = ref<AgendaItem>();
 
-const text = ref<string>("");
 const preview = ref<HTMLCanvasElement>();
 const canvas = new WindowCanvas();
 
@@ -30,48 +27,6 @@ function openPresentation() {
 }
 
 async function renderTemplate(template: Renderable) {
-	try {
-		if (canvas.isRunning()) {
-			const liveContext = canvas.getContext();
-			await template.renderOnContext(liveContext);
-		}
-		const previewContext = preview.value?.getContext("2d")!;
-		await template.renderOnContext(previewContext);
-	} catch (e) {
-		console.error(e);
-		throw e;
-	}
-}
-
-async function renderSplashscreen() {
-	try {
-		await renderTemplate(new Splashscreen({
-			title: "5. ordentlicher Landesparteitag",
-			association: "Volt Rheinland-Pfalz"
-		}));
-	} catch (e) {
-		console.error(e);
-	}
-}
-
-async function printTopTitle(agendaItem: AgendaItem) {
-	await renderTemplate(new AgendaItemTitle({
-		title: agendaItem.title,
-		digit: agendaItem.digit,
-		color: "yellow"
-	}));
-}
-
-async function renderContentSlide() {
-	try {
-		await renderTemplate(new TextContentSlide({
-			color: "red",
-			title: "Tagesordnung",
-			text: text.value
-		}));
-	} catch (e) {
-		console.error(e);
-	}
 }
 
 function selectAgendaItem(item: AgendaItem) {
@@ -85,7 +40,7 @@ function selectSettings() {
 	screen.value = "settings";
 }
 
-const rundownSteps = ref<ProceduresFileSchemaRundownStep[]>([]);
+const rundownSteps = ref<LinearRundownItem[]>([]);
 
 const procedures = new Procedures();
 
@@ -110,11 +65,11 @@ const settingsTitles: { [name in keyof Settings]: string } = {
 };
 
 const settings = reactive<Settings>({
-	association: "Volt Rheinland-Pfalz",
-	event: "5. Ordentlicher Landesparteitag",
+	association: assembly.association,
+	event: assembly.event,
 	chairpersons: ["Jan Peter König", "Jennifer Scharpenberg"],
 	secretaries: ["Ron-David Roeder"],
-	countingCommission: [],
+	countingCommission: ["Sabrina Hinz", "Nic Kraneis", "Sascha Zimmermann"],
 	invitationDate: "24.11.2023",
 	participants: 15
 });
@@ -133,14 +88,39 @@ function setRundownSteps() {
 	if (!agendaItem.value)
 		rundownSteps.value = [];
 	else {
-		rundownSteps.value = procedures.getRundown(agendaItem.value, procedureParams.value);
+		rundownSteps.value = procedures.resolveAgendaItem(assembly, agendaItem.value, procedureParams.value);
 	}
 }
 
-async function openSlide(agendaItem: AgendaItem, step: ProceduresFileSchemaRundownStep) {
-	procedures.setColor(getRandomColor());
-	const slide = procedures.getSlide(agendaItem, step, procedureParams.value);
-	await renderTemplate(slide);
+async function openSlide(agendaItem: AgendaItem, step: LinearRundownItem) {
+	if (!step.slide)
+		throw new Error("Rundown item has no slide");
+
+	const slide = step.slide(getRandomColor());
+
+	try {
+		if (canvas.isRunning()) {
+			const liveContext = canvas.getContext();
+			await slide.renderOnContext(liveContext);
+		}
+		const previewContext = preview.value?.getContext("2d")!;
+		await slide.renderOnContext(previewContext);
+	} catch (e) {
+		console.error(e);
+		throw e;
+	}
+}
+
+async function doSpecialOperation(operationGetter: () => SpecialOperation) {
+	const operation = operationGetter();
+
+	switch (operation.type) {
+		case "open-link":
+			canvas.openLink(operation.url);
+			break;
+		default:
+			throw new Error(`Unknown special operation type ${operation.type}`);
+	}
 }
 
 </script>
@@ -213,48 +193,24 @@ async function openSlide(agendaItem: AgendaItem, step: ProceduresFileSchemaRundo
 									<p v-if="step.example" class="is-italic mt-2">
 										{{ step.example }}
 									</p>
+									{{ step.operation === undefined ? "" : JSON.stringify(step.operation) }}
+									<div v-if="step.operation">
+										<button @click="doSpecialOperation(step.operation)"
+												class="button is-primary is-small" type="button">
+											Spezialoperation ausführen
+										</button>
+									</div>
 									<div v-if="step.slide" class="mt-2">
 										<button @click="openSlide(agendaItem, step)" class="button is-primary is-small"
-												type="button">Folie
-											öffnen
+												type="button">Folie öffnen
 										</button>
 									</div>
 									<hr>
 								</li>
 							</ul>
 						</div>
-
-						<div v-if="agendaItem?.type === 'opening'">
-
-						</div>
-						<div v-else-if="agendaItem?.type === 'chairperson-election'">
-						</div>
-
-						<div v-else-if="agendaItem?.type === 'counting-commission-election'">
-
-						</div>
-						<div v-else-if="agendaItem?.type === 'agenda-approval'">
-
-						</div>
-						<div v-else-if="agendaItem?.type === 'motion-order'">
-
-						</div>
-						<div v-else-if="agendaItem?.type === 'amendments'">
-
-						</div>
-						<div v-else-if="agendaItem?.type === 'election'">
-
-						</div>
-						<div v-else-if="agendaItem?.type === 'closing'">
-
-						</div>
-						<div>
-							<button class="button is-dark" @click="renderSplashscreen">Render Splashscreen</button>
-							<button class="button is-dark" @click="renderContentSlide">Render Content-Slide</button>
-							<textarea class="textarea" v-model="text" />
-						</div>
 					</div>
-					<div class="column is-one-fifth" style="position: fixed; right: 0">
+					<div class="column is-two-fifths" style="position: fixed; right: 0">
 						<div class="box">
 							<canvas ref="preview" width="1920" height="1080" style="width: 100%" />
 						</div>

@@ -35,6 +35,15 @@ export interface AgendaItemAmendments extends AgendaItemCommons {
     motions: string[];
 }
 
+export interface AgendaItemAgendaApprovalAndMotionOrder extends AgendaItemCommons {
+    type: "agenda-approval-and-motion-order";
+}
+
+export interface AgendaItemPresentation extends AgendaItemCommons {
+    type: "presentation";
+    links: string[];
+}
+
 export interface ElectionSystem {
     norm: string;
 }
@@ -42,7 +51,10 @@ export interface ElectionSystem {
 export interface AgendaItemElection extends AgendaItemCommons {
     type: "election";
     system: ElectionSystem[];
-    candidates: string[];
+    candidates: {
+        name: string;
+        position: string
+    }[];
 }
 
 export interface AgendaItemClosing extends AgendaItemCommons {
@@ -52,6 +64,7 @@ export interface AgendaItemClosing extends AgendaItemCommons {
 export type AgendaItem = AgendaItemOpening
     | AgendaItemChairpersonElection | AgendaItemCountingCommissionElection
     | AgendaItemAgendaApproval | AgendaItemMotionOrder | AgendaItemAmendments
+    | AgendaItemAgendaApprovalAndMotionOrder | AgendaItemPresentation
     | AgendaItemElection | AgendaItemClosing;
 
 export interface Assembly {

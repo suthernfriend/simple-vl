@@ -1,0 +1,71 @@
+event: "9. Ordentlicher Landesparteitag"
+association: "Volt Rheinland-Pfalz"
+start: "2023-12-16T11:00:00.000Z"
+location: "HfGG (Hochschule für Gesellschaftsgestaltung) in Koblenz, Kornpfortstraße 15"
+motions:
+  RLP-F-1:
+    title: "Haushalts- und Finanzplanung 2024"
+    link: "https://drive.google.com/file/d/1r1rKj8HU8_5iO4ZbARDiBUctIkqtmD2T/view"
+    presenter: "Sebastian Gerhard"
+  RLP-L-1:
+    title: "Tätigkeitsbericht des Landesvorstandes für das Jahr 2021 (finanzieller Teil)"
+    link: "https://drive.google.com/file/d/1DQFh0F6bR5KMKrxxY6ro8m0acAMZBPwD/view"
+    presenter: "Sebastian Gerhard"
+  RLP-L-2:
+    title: "Prüfbericht der Rechnungsprüfer für das Jahr 2021"
+    link: "https://drive.google.com/file/d/1W7TmOmGmPvpejmZjJjFA_CvUznMEHLh-/view"
+    presenter: "Matthias Bayer"
+agenda:
+  - type: "opening"
+    digit: "1"
+    title: "Eröffnung durch den Landesvorstand"
+  - type: "chairperson-election"
+    digit: "2"
+    title: "Bestimmung der Versammlungsleitung (inkl. Schriftführung)"
+  - type: "counting-commission-election"
+    digit: "3"
+    title: "Bestimmung der Zählkommission"
+  - type: "agenda-approval-and-motion-order"
+    digit: "4"
+    title: "Genehmigung der Tagesordnung und Antragsreihenfolge"
+  - type: "amendments"
+    digit: "5"
+    title: "Finanzen und Haushalt für das Jahr 2024"
+    motions:
+      - RLP-F-1
+  - type: "presentation"
+    digit: "6"
+    title: "Finanzen & Rechenschaftsbericht für das Jahr 2022"
+    links:
+      - "https://drive.google.com/file/d/1P15Lez7NLsiEtR1YlmUsSq6CN45pOGs2/view?usp=sharing"
+  - type: "amendments"
+    digit: "7"
+    title: "Tätigkeitsbericht des Landesvorstandes für das Jahr 2021 (finanzieller Teil) inkl. Prüfbericht der Rechnungsprüfer"
+    motions:
+      - RLP-L-1
+      - RLP-L-2
+  - type: "election"
+    digit: "8"
+    title: "Wahl der Landesrechnungsprüfer*innen"
+    candidates:
+      - name: "Matthias Bayer"
+        position: "Landesrechnungsprüfer*in"
+      - name: "Jacques Fritze"
+        position: "Landesrechnungsprüfer*in"
+  - type: "election"
+    digit: "9"
+    title: "Nachwahl im Landesschiedsgericht"
+    candidates: []
+  - type: "election"
+    digit: "10"
+    title: "Nachwahl im Landesvorstand"
+    candidates:
+      - name: "Dominik Springer"
+        position: "stv. Landesvorsitzenden"
+  - type: "amendments"
+    digit: "11"
+    title: "Anträge an den Landesparteitag"
+    motions: [ ]
+  - type: "closing"
+    digit: "12"
+    title: "Schluss der Versammlung & Beginn des Abendprogramms"

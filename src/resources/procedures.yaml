@@ -47,10 +47,72 @@ agendaTypes:
         text: "Wahl der Zählkommission mit einfacher Mehrheit"
         example: "Ich schlage vor als Zählkommission: {countingCommission}"
 
+  agenda-approval-and-motion-order:
+    rundown:
+      - title: "Aufruf des Tagesordnungpunkts"
+        slide: "top"
+        text: "Kurz erklären, dass wir über die Tagesordnung und die Antragsreihenfolge abstimmen müssen"
+      - title: "Vorstellung"
+        text: "Die (geänderte) Tagesordnung wird auf einer Folie vorgestellt"
+        slide: "agenda"
+      - title: "Änderungsanträge zur Tagesordnung"
+        text: "Hier könnten Änderungsanträge zur Tagesordnung gestellt werden"
+      - title: "Offene Abstimmung"
+        text: "Über die Tagesordnung muss mit einfacher Mehrheit Beschluss gefasst werden."
+        example: "Stimmt ihr der (geänderten) Tagesordnung, wie vorgestellt zu?"
+      - title: "Vorstellung"
+        text: "Die Antragsreihenfolge wird auf einer Folie vorgestellt"
+        slide: "motion-order"
+      - title: "Offene Abstimmung"
+        text: "Über die Antragsreihenfolge muss mit einfacher Mehrheit Beschluss gefasst werden."
+        example: "Stimmt ihr der Antragsreihenfolge, wie vorgestellt zu?"
+
+  closing:
+    rundown:
+      - title: "Aufruf des Tagesordnungpunkts"
+        slide: "top"
+        text: "Schließung der Versammlung"
+        example: "Hiermit schließe ich den {event} um XX:YY."
+
+  election:
+    rundown:
+      - title: "Aufruf des Tagesordnungpunkts"
+        slide: "top"
+      - title: "Erklärung"
+        text: "Erklären wie die Wahl abläuft."
+      - title: "Offene Abstimmung"
+        text: "Beschluss der Vorstellungszeit"
+        example: "Stimmt ihr zu, die Vorstellungszeit auf XX Minuten zu begrenzen?"
+      - doWithEachCandidate:
+            - title: "Vorstellung von {candidateName}"
+              slide: "candidate"
+              text: "Vorstellung des Kandidaten {candidateName} (kandidiert für {candidatePosition}) durch den Kandidaten selbst."
+      - title: "Feststellung"
+        text: "Die Versammlungsleitung stellt fest, dass alle stimmberechtigten Teilnehmenden der Versammlung vorschlagsberechtigt war und alle Bewerber die Möglichkeit hatten sich in angemessener Zeit vorzustellen."
+      - title: "Erklärung über das Wahlverfahren"
+        text: ""
+      - title: "Feststellung"
+        text: "Die Versammlungsleitung stellt fest, dass die Wahl unbeobachtet zu erfolgen hat und dass die allgemeinen Grundsätze der Wahl, darunter insbesondere der Geheimheit der Wahl einzuhalten sind. "
+      - title: "Erklärung"
+        text: "über wie die Abstimmung läuft Zählkommission läuft umher und tausch Stimmzettel gegen Zeigen der Stimmkarte, dabei werden die Nummern der Stimmkarten notiert. Anschließend wird die Urne vorgezeigt und jeder kann seinen Stimmzettel selbst zur Urne bringen (die wird vorne stehen). Ein Einwerfen ist erst nach Öffnung des Wahlgangs erlaubt."
+      - title: "Eröffnung des Wahlgangs"
+        text: "Erneuter Hinweis auf die Notwendigkeit der Geheimheit der Wahl. Bitte um Ruhe während des Wahlgangs. Bei Abholung der Stimmzettel muss zweimal nachgefragt werden, ob alle einen Stimmzettel haben."
+      - title: "Schließung des Wahlgangs"
+        text: "Bei Abgeben der Stimmzettel muss zweimal nachgefragt werden, ob alle ihre Stimmzettel abgegeben haben. Bitte an die Zählkommission, das Ergebnis der Abstimmung zu ermitteln und danach der Versammlungsleitung mitzuteilen."
+
+
+  presentation:
+    rundown:
+      - doWithEachLink:
+          - title: "Vorstellung"
+            operation: "load-link"
+            operationArgument: "{link}"
+
   agenda-approval:
     rundown:
       - title: "Aufruf des Tagesordnungpunkts"
         slide: "top"
+        text: "Kurz erklären, dass wir über die Tagesordnung abstimmen müssen"
       - title: "Vorstellung"
         text: "Die (geänderte) Tagesordnung wird auf einer Folie vorgestellt"
         slide: "agenda"
@@ -76,25 +138,31 @@ agendaTypes:
     rundown:
       - title: "Aufruf des Tagesordnungpunkts"
         slide: "top"
-      - foreachMotion:
-        - title: "Vorstellung"
-          text: "Vorstellung des Antrags durch den Antragssteller (oder die als Vortragenden bestimmte Person)"
-        - title: "Externen Link öffnen"
-          operation: "loadMotionLink"
-        - title: "Debatte"
-          text: "In einer Debatte wird der Antrag debattiert, dazu können Teilnehmer Redebeiträge einbringen. Auf Redebeiträge können Zwischenfragen an den jeweiligen Redner gestellt werden."
-        - title: "Vorstellung Änderungsanträge"
-          text: "Die Vorstellung der Änderungsanträge folgt."
-        - foreachAmemdment:
+      - title: "Bearbeitung der Anträge"
+        text: "Es folgt die Abarbeitung der Anträge in der Reihenfolge wie beschlossen"
+        doWithEachMotion:
+          - title: "Vorstellung"
+            text: "Vorstellung des Antrags {motionDigit} {motionTitle} durch den Antragssteller (oder die als Vortragenden bestimmte Person).\nAntragssteller ist {motionPresenter}"
           - title: "Externen Link öffnen"
-            operation: "loadMotionLink"
+            operation: "load-link"
+            operationArgument: "{motionLink}"
           - title: "Debatte"
-            text: "In einer Debatte wird der Änderungsantrag debattiert, dazu können Teilnehmer Redebeiträge einbringen. Auf Redebeiträge können Zwischenfragen an den jeweiligen Redner gestellt werden."
+            text: "In einer Debatte wird der Antrag {motionDigit} {motionTitle} debattiert, dazu können Teilnehmer Redebeiträge einbringen. Auf Redebeiträge können Zwischenfragen an den jeweiligen Redner gestellt werden."
+          - title: "Vorstellung Änderungsanträge"
+            text: "Die Vorstellung der Änderungsanträge folgt."
+            doWithEachAmendment:
+              - title: "Vorstellung"
+                text: "Vorstellung des Änderungsantrags {amendmentDigit} zum Antrag {motionDigit} {motionTitle} durch den Antragssteller (oder die als Vortragenden bestimmte Person)"
+              - title: "Externen Link öffnen"
+                operation: "load-link"
+                operationArgument: "{amendmentLink}"
+              - title: "Debatte"
+                text: "In einer Debatte wird der Änderungsantrag debattiert, dazu können Teilnehmer Redebeiträge einbringen. Auf Redebeiträge können Zwischenfragen an den jeweiligen Redner gestellt werden."
+              - title: "Offene Abstimmung"
+                text: "In einer offenen Abstimmung wird über den Änderungsantrag abgestimmt. Hierbei wird zuerst nach Zustimmung und dann nach Gegenstimmen, sowie nach Enthaltungen gefragt."
+                example: "Wer stimmt für den Änderungsantrag {amendmentDigit} zum Antrag {motionDigit}? Wer stimmt dagegen? Wer enthält sich der Stimme?"
+          - title: "Debatte"
+            text: "In einer zweiten Debatte über den Hauptantrag können erneut Redebeiträge über den Antrag mitsamt aller Änderungsanträge eingebracht werden."
           - title: "Offene Abstimmung"
-            text: "In einer offenen Abstimmung wird über den Änderungsantrag abgestimmt. Hierbei wird zuerst nach Zustimmung und dann nach Gegenstimmen, sowie nach Enthaltungen gefragt."
-            example: "Wer stimmt für den Änderungsantrag {amendmentDigit} zum Antrag {motionDigit}? Wer stimmt dagegen? Wer enthält sich der Stimme?"
-        - title: "Debatte"
-          text: "In einer zweiten Debatte über den Hauptantrag können erneut Redebeiträge über den Antrag mitsamt aller Änderungsanträge eingebracht werden."
-        - title: "Offene Abstimmung"
-          text: "In einer offenen Abstimmung wird über den Hauptantrag mitsamt aller abgestimmten Änderungsanträge abgestimmt. Hierbei wird zuerst nach Zustimmung und dann nach Gegenstimmen, sowie nach Enthaltungen gefragt."
-          example: "Wer stimmt für den Antrag {motionDigit}? Wer stimmt dagegen? Wer enthält sich der Stimme?"
+            text: "In einer offenen Abstimmung wird über den Hauptantrag mitsamt aller abgestimmten Änderungsanträge abgestimmt. Hierbei wird zuerst nach Zustimmung und dann nach Gegenstimmen, sowie nach Enthaltungen gefragt."
+            example: "Wer stimmt für den Antrag {motionDigit}? Wer stimmt dagegen? Wer enthält sich der Stimme?"
