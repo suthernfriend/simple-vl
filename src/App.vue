@@ -13,14 +13,21 @@ import { Procedures } from "@/lib/assembly/Procedures";
 import { getRandomColor } from "@/lib/display/templates/GenericVoltBackgroundAwareRenderable";
 import AssemblyState from "@/components/AssemblyState.vue";
 import type { SpecialOperation } from "@/lib/display/SpecialOperation";
+import { TextContentSlide } from "@/lib/display/templates/TextContentSlide";
+import { AgendaItemTitle } from "@/lib/display/templates/AgendaItemTitle";
+import { CandidateSlide } from "@/lib/display/templates/CandidateSlide";
+import { PersonSlide } from "@/lib/display/templates/PersonSlide";
 
 const assembly = assemblyImport as Assembly;
 
-const screen = ref<"settings" | "agenda">("settings");
+const screen = ref<"settings" | "agenda" | "custom">("settings");
 const agendaItem = ref<AgendaItem>();
 
 const preview = ref<HTMLCanvasElement>();
 const canvas = new WindowCanvas();
+
+const customSlideTitle = ref("");
+const customSlideText = ref("");
 
 function openPresentation() {
 	canvas.start();
@@ -38,6 +45,11 @@ function selectAgendaItem(item: AgendaItem) {
 function selectSettings() {
 	agendaItem.value = undefined;
 	screen.value = "settings";
+}
+
+function selectCustom() {
+	agendaItem.value = undefined;
+	screen.value = "custom";
 }
 
 const rundownSteps = ref<LinearRundownItem[]>([]);
@@ -68,8 +80,8 @@ const settings = reactive<Settings>({
 	association: assembly.association,
 	event: assembly.event,
 	chairpersons: ["Jan Peter König", "Jennifer Scharpenberg"],
-	secretaries: ["Ron-David Roeder"],
-	countingCommission: ["Sabrina Hinz", "Nic Kraneis", "Sascha Zimmermann"],
+	secretaries: ["Ron-David Röder", "Sabrina Hinz"],
+	countingCommission: ["Detlef Barsuhn", "Torsten Nessel", "Philipp Leisner"],
 	invitationDate: "24.11.2023",
 	participants: 15
 });
@@ -89,6 +101,30 @@ function setRundownSteps() {
 		rundownSteps.value = [];
 	else {
 		rundownSteps.value = procedures.resolveAgendaItem(assembly, agendaItem.value, procedureParams.value);
+	}
+}
+
+async function openCustomSlide(type: "text" | "person") {
+	const slide = type === "text" ? new TextContentSlide({
+		color: getRandomColor(),
+		text: customSlideText.value,
+		title: customSlideTitle.value
+	}) : new PersonSlide({
+		color: getRandomColor(),
+		name: customSlideTitle.value,
+		position: customSlideText.value
+	});
+
+	try {
+		if (canvas.isRunning()) {
+			const liveContext = canvas.getContext();
+			await slide.renderOnContext(liveContext);
+		}
+		const previewContext = preview.value?.getContext("2d")!;
+		await slide.renderOnContext(previewContext);
+	} catch (e) {
+		console.error(e);
+		throw e;
 	}
 }
 
@@ -149,6 +185,7 @@ async function doSpecialOperation(operationGetter: () => SpecialOperation) {
 							</p>
 							<ul class="menu-list">
 								<li><a @click="selectSettings()">Event Einstellungen</a></li>
+								<li><a @click="selectCustom()">Manuell</a></li>
 							</ul>
 							<p class="menu-label">
 								Tagesordnung
@@ -210,7 +247,35 @@ async function doSpecialOperation(operationGetter: () => SpecialOperation) {
 							</ul>
 						</div>
 					</div>
-					<div class="column is-two-fifths" style="position: fixed; right: 0">
+					<div v-else-if="screen === 'custom'" class="column is-three-fifths">
+						<h1 class="title is-3">Spontane Folie</h1>
+						<div>
+							<h2 class="title is-4">Text Folie</h2>
+							<div class="field">
+								<label class="label">Folien-Titel</label>
+								<div class="control">
+									<input v-model="customSlideTitle" type="text" class="input"
+										   placeholder="Folien-Titel">
+								</div>
+							</div>
+							<div class="field">
+								<label class="label">Folien-Text</label>
+								<div class="control">
+									<textarea v-model="customSlideText" rows="10" class="input textarea"
+											  placeholder="Folien-Text"></textarea>
+								</div>
+							</div>
+							<div class="field">
+								<button @click="openCustomSlide('text')" type="button" class="button is-primary">
+									Text Folie öffnen
+								</button>
+								<button @click="openCustomSlide('person')" type="button" class="button is-primary">
+									Personen Folie öffnen
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="column is-one-fifth" style="position: fixed; right: 0">
 						<div class="box">
 							<canvas ref="preview" width="1920" height="1080" style="width: 100%" />
 						</div>

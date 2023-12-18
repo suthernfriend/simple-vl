@@ -93,11 +93,19 @@ export class Procedures {
 				const chairpersonLead = chairpersons[0];
 				const chairpersonRest = chairpersons.slice(1);
 
+				const secretaries = parameters["secretaries"].split(", ");
+				const secretaryLead = secretaries[0];
+				const secretaryRest = secretaries.slice(1);
+
 				return new TextContentSlide({
 					title: `TOP ${agendaItem.digit}: ${agendaItem.title}`,
 					text: "Als Versammlungsleitung wird vorgeschlagen:\n\n" +
 						chairpersonLead + " (Leitung)\n" +
-						chairpersonRest.join(", "),
+						chairpersonRest.join(", ") + "\n" +
+						"\n\n" +
+						"Als Schriftführung wird vorgeschlagen:\n\n" +
+						secretaryLead + " (Leitung)\n" +
+						secretaryRest.join(", "),
 					color
 				});
 			case "candidate":
